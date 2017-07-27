@@ -66,6 +66,10 @@ app.controller('mainCtrl', function($scope, $http) {
 
     }
 
+    $scope.filterSupermarkets = function(){
+        if ($scope.supermarket==places.supermarket){
+            return true;
+        }
+    }
 })
 
-// AIzaSyC7zJxJPcVGEHKdtOeMcC0KnznRonaabIU

@@ -71,6 +71,117 @@
                 }
 
             }
+        },
+         {
+            "formatted_address": "Target Jacksonville",
+            "supermarket": "target",
+
+            "geometry":
+            {
+                "location":
+                {
+                    "lat": 30.194088900,
+                    "lng": -81.548415700
+                }
+
+            }
+        },
+         {
+            "formatted_address": "Target Center",
+            "supermarket": "target",
+            "geometry":
+            {
+                "location":
+                {
+                    "lat": 44.974329436,
+                    "lng": -93.272332244
+                }
+
+            }
+        },
+         {
+            "formatted_address": "Target Store",
+            "supermarket": "target",
+
+            "geometry":
+            {
+                "location":
+                {
+                    "lat": 47.5654,
+                    "lng": -122.33027
+                }
+
+            }
+        },
+         {
+            "formatted_address": "Target Fun",
+            "supermarket": "target",
+
+            "geometry":
+            {
+                "location":
+                {
+                    "lat": 37.37255,
+                    "lng": -121.99503
+                }
+
+            }
+        },
+         {
+            "formatted_address": " Costco Wholesale Bellevue",
+            "supermarket": "costco",
+            "geometry":
+            {
+                "location":
+                {
+                    "lat": 44.458570,
+                    "lng": -87.98530
+                }
+
+            }
+        },
+      
+          {
+            "formatted_address": "Costco Wholesale",
+            "supermarket": "costco",
+
+            "geometry":
+            {
+                "location":
+                {
+                    "lat": 41.126320 ,
+                    "lng": -85.159010
+                }
+
+            }
+        },
+          {
+            "formatted_address": "Costco Tires",
+            "supermarket": "costco",
+
+            "geometry":
+            {
+                "location":
+                {
+                    "lat": 41.273680 ,
+                    "lng": -111.711730
+                }
+
+            }
+        },
+          {
+            "formatted_address": "Costco Optical",
+            "supermarket": "costco",
+
+            "geometry":
+            {
+                "location":
+                {
+                    "lat": 36.1632,
+                    "lng": -115.333180
+                }
+
+            }
         }
     ],
     "status": "OK"
