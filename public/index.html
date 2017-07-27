@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <link href="bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+</head>
+
+<body ng-app="compie" ng-controller="mainCtrl">
+    <form>
+        <div class="input-group">
+            <input id="pac-input" type="text" class="form-control" placeholder="My Location">
+            <div class="input-group-btn">
+                
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="sel1">Select Supermarket:</label>
+            <select class="form-control" ng-model="supermarket">
+                <option value= "walmart">Walmart</option>
+                <option value= "costco">Costco</option>
+                <option value= "target">Target</option>
+            </select>
+        </div>
+        <button class="btn btn-default" type="submit" ng-click="findDistances()">
+                    Send </button>
+    </form>
+    <div ng-repeat="place in places | orderBy: 'value' track by $index ">
+        {{place.add}} --- {{place.dist}} --- {{place.supermarket}}
+    </div>
+    <script src="main.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7zJxJPcVGEHKdtOeMcC0KnznRonaabIU&libraries=places&callback=initMap">
+    </script>
+    <script src="angular/angular.js"></script>
+    <script src="app.js"></script>
+    <script src="mainController.js"></script>
+
+</html>
