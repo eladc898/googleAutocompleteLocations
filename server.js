@@ -1,13 +1,6 @@
-var express = require ('express')
-var app = express();
-
+const express = require ('express')
+const app = express();
 
 app.use(express.static('public'));
 app.use(express.static('node_modules'));
-
-
-
-
-app.listen(8080, function(){
-	console.log("Listening on 8080");
-});
+app.listen(3000, () => console.log('App listening on port 3000!'))

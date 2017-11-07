@@ -1,35 +1,41 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="UTF-8">
-    <title>title</title>
-    <link href="bootstrap/dist/css/bootstrap.css" rel="stylesheet">
-</head>
-
-<body ng-app="compie" ng-controller="mainCtrl">
-    <form>
-            <input id="pac-input" type="text" class="form-control" placeholder="My Location">
-            
-        <div class="form-group">
-            <label for="sel1">Select Supermarket:</label>
-            <select class="form-control" ng-model="supermarket">
-                <option value= "walmart">Walmart</option>
-                <option value= "costco">Costco</option>
-                <option value= "target">Target</option>
-            </select>
-        </div>
-       <button class="btn btn-default" type="button" ng-click="findDistances()">
-                    Send </button>
-                    <p>Please keep clicking until the list is visable:) </p>
-    </form>
-    <div ng-repeat="place in places | filter: supermarket | orderBy: 'value' track by $index ">
-        {{place.add}} --- {{place.dist}} 
-    </div>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7zJxJPcVGEHKdtOeMcC0KnznRonaabIU&libraries=places&callback=initMap">
-    </script>
-    <script src="angular/angular.js"></script>
+	<head>
+		<meta charset="UTF-8">
+		<title>Locations based auto complete</title>
+		<link href="bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+		<link href="style.css" rel="stylesheet">
+		<script src="angular/angular.js"></script>
     <script src="app.js"></script>
     <script src="mainController.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCIhfTdJXIKUiStJ8HkSTWvloQHBa6jLiU&libraries=places&callback=initMap"
+        async defer>
+    </script>
+	</head>
 
+	<body ng-app="compie" ng-controller="mainCtrl">
+		<div class="container">
+			<div>
+				<div class="input-wrap">
+					<label for="sel1">Please enter location:</label> 
+					<input id="pac-input" type="text" class="form-control" placeholder="Pick Location">
+				</div>
+				<div class="input-wrap">
+					<label for="sel1">Select Supermarket:</label>
+					<select class="form-control" ng-model="supermarket">
+						<option value="walmart">Walmart</option>
+						<option value="costco">Costco</option>
+						<option value="target">Target</option>
+					</select>
+				</div>
+				<button class="btn btn-default" type="button" ng-click="findDistances()">
+					get locations 
+				</button>
+			</div>
+			<div class="location-info-wrapper" ng-repeat="place in places | filter: supermarket | orderBy: 'value' track by $index">
+				<div class="location-name">{{place.add}}</div>
+				<div class="location-dist">{{place.dist}}</div>
+			</div>
+		</div>
+	</body>
 </html>

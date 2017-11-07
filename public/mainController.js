@@ -1,11 +1,3 @@
-// var autocomplete;
-
-// var initMap = function() {
-//     var input = document.getElementById('pac-input');
-//     autocomplete = new google.maps.places.Autocomplete(input);
-// }
-
-
 app.controller('mainCtrl', function($scope, $http) {
 
     var locations = [];
@@ -22,15 +14,11 @@ app.controller('mainCtrl', function($scope, $http) {
     $scope.places = [];
 
     $scope.findDistances = function(city) {
-
-        var address;
-
-        var place = autocomplete.getPlace();
-
+        let address;
+        const place = autocomplete.getPlace();
 
         if (!place || !place.geometry) {
             var input = document.getElementById('pac-input');
-
             // User entered the name of a Place that was not suggested and
             // pressed the Enter key, or the Place Details request failed.
             window.alert("No details available for input: '" + input.value + "'");
@@ -45,10 +33,7 @@ app.controller('mainCtrl', function($scope, $http) {
             ].join(' ');
         }
 
-
-
         var destinations = [];
-
         for (var i = 0; i < locations.length; i++) {
             destinations.push(new google.maps.LatLng(locations[i].latLng.lat, locations[i].latLng.lng))
         };
@@ -61,7 +46,7 @@ app.controller('mainCtrl', function($scope, $http) {
             travelMode: 'DRIVING',
             avoidHighways: true,
             avoidTolls: true,
-        }, function(response, status) {
+        }, (response, status) => {
             var answers = [];
 
             for (var i = 0; i < locations.length; i++) {
@@ -69,13 +54,13 @@ app.controller('mainCtrl', function($scope, $http) {
                     answers.push({ add: locations[i].address, supermarket: locations[i].supermarket, dist: response.rows[0].elements[i].distance.text, value: response.rows[0].elements[i].distance.value })
                 }
             };
-            $scope.places = answers
+						$scope.places = answers;
+						$scope.$apply();
         });
-
-    }
-
+		}
+	
     $scope.filterSupermarkets = function(){
-        if ($scope.supermarket==places.supermarket){
+        if ($scope.supermarket === places.supermarket){
             return true;
         }
     }
