@@ -6,6 +6,7 @@
 		<link href="bootstrap/dist/css/bootstrap.css" rel="stylesheet">
 		<link href="style.css" rel="stylesheet">
 		<script src="angular/angular.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
     <script src="app.js"></script>
     <script src="mainController.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCIhfTdJXIKUiStJ8HkSTWvloQHBa6jLiU&libraries=places&callback=initMap"
@@ -13,7 +14,7 @@
     </script>
 	</head>
 
-	<body ng-app="compie" ng-controller="mainCtrl">
+	<body ng-app="compieApp" ng-controller="mainCtrl">
 		<div class="container">
 			<div>
 				<div class="input-wrap">
@@ -23,18 +24,27 @@
 				<div class="input-wrap">
 					<label for="sel1">Select Supermarket:</label>
 					<select class="form-control" ng-model="supermarket">
-						<option value="walmart">Walmart</option>
-						<option value="costco">Costco</option>
-						<option value="target">Target</option>
+						<option selected="selected" value="All">All</option>
+						<option value="RamiLevi">RamiLevi</option>
+						<option value="Shufersal">Shufersal</option>
+						<option value="Mega">Mega</option>
+						<option value="Yenot">Yenot</option>
 					</select>
 				</div>
-				<button class="btn btn-default" type="button" ng-click="findDistances()">
+				<button class="btn btn-default" type="button" ng-click="getAllDistances()">
 					get locations 
 				</button>
 			</div>
-			<div class="location-info-wrapper" ng-repeat="place in places | filter: supermarket | orderBy: 'value' track by $index">
-				<div class="location-name">{{place.add}}</div>
-				<div class="location-dist">{{place.dist}}</div>
+			<div class="best-supermarket">The best supermarket net in your area is: {{ bestSupermarket }}</div>
+			<div class="location-info-wrapper location-header">
+				<div class="">Supermarket</div>
+				<div class="">Address</div>
+				<div class="">Distance</div>
+			</div>
+			<div class="location-info-wrapper" ng-repeat="s in supermarketsList | supermaketFilter:supermarket | orderBy: 'value' track by $index">
+				<div class="location-name">{{s.supermarket}}</div>
+				<div class="location-name">{{s.address}}</div>
+				<div class="location-dist">{{s.distance}}</div>
 			</div>
 		</div>
 	</body>

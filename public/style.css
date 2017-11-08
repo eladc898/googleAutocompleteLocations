@@ -16,19 +16,26 @@
   width: 300px;
 }
 
+
 .location-info-wrapper {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 320px;
+  width: 620px;
   font-size: 18px;
   font-family: Arial, Helvetica, sans-serif;
+  margin-top: 5px;
 }
 
-.location-name {
-
+.location-header {
+  font-weight: bold;
+  font-size: 20px;
+  margin-top: 30px;
 }
 
-.location-dist {
-
+.best-supermarket {
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 25px;
+  color: blue;
 }

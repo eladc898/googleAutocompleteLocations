@@ -1,27 +1,25 @@
 app.controller('mainCtrl', function($scope, $http) {
-
     var locations = [];
+    $scope.supermarket = 'All';
+    $scope.supermarketsList = [];
+    const RADIUS = 50000;
 
-    $http.get('/supermarkets.json').then(function(response) {
-        for (var i = 0; i < response.data.results.length; i++) {
-            locations.push({ latLng: response.data.results[i].geometry.location, address: response.data.results[i].formatted_address, supermarket: response.data.results[i].supermarket})
+    $http.get('/supermarketsTest.json').then(function(response) {
+        for (var i = 0; i < response.data.supermarketsList.length; i++) {
+            locations.push({ geoLocation: response.data.supermarketsList[i].location, address: response.data.supermarketsList[i].address, supermarket: response.data.supermarketsList[i].supermarket})
         };
     })
 
-    $scope.supermarket;
 
-
-    $scope.places = [];
-
-    $scope.findDistances = function(city) {
+    $scope.getAllDistances = function() {
         let address;
+        $scope.supermarketsList = [];
         const place = autocomplete.getPlace();
 
         if (!place || !place.geometry) {
             var input = document.getElementById('pac-input');
-            // User entered the name of a Place that was not suggested and
-            // pressed the Enter key, or the Place Details request failed.
-            window.alert("No details available for input: '" + input.value + "'");
+            // Case the user entered the name of a Place that was not suggested
+            window.alert("Cannot get distances for input: '" + input.value + "'");
             return;
         }
 
@@ -29,13 +27,14 @@ app.controller('mainCtrl', function($scope, $http) {
             address = [
                 (place.address_components[0] && place.address_components[0].short_name || ''),
                 (place.address_components[1] && place.address_components[1].short_name || ''),
-                (place.address_components[2] && place.address_components[2].short_name || '')
+                (place.address_components[2] && place.address_components[2].short_name || ''),
+                (place.address_components[3] && place.address_components[3].short_name || '')
             ].join(' ');
         }
 
         var destinations = [];
         for (var i = 0; i < locations.length; i++) {
-            destinations.push(new google.maps.LatLng(locations[i].latLng.lat, locations[i].latLng.lng))
+            destinations.push(new google.maps.LatLng(locations[i].geoLocation.latetiude, locations[i].geoLocation.longitude))
         };
 
         var service = new google.maps.DistanceMatrixService();
@@ -43,26 +42,75 @@ app.controller('mainCtrl', function($scope, $http) {
         service.getDistanceMatrix({
             origins: [address],
             destinations: destinations,
-            travelMode: 'DRIVING',
-            avoidHighways: true,
-            avoidTolls: true,
+            travelMode: google.maps.TravelMode.DRIVING,
+            avoidHighways: false,
+            avoidTolls: false,
         }, (response, status) => {
-            var answers = [];
-
+            var res = [];
             for (var i = 0; i < locations.length; i++) {
+                if (response.rows[0].elements[i].status === "ZERO_RESULTS") {
+                    alert('Cant get distances by driving to the given location');
+                    return;
+                }
                 if (response.rows[0].elements[i].distance) {
-                    answers.push({ add: locations[i].address, supermarket: locations[i].supermarket, dist: response.rows[0].elements[i].distance.text, value: response.rows[0].elements[i].distance.value })
+                    res.push({ address: locations[i].address, 
+                               supermarket: locations[i].supermarket, 
+                               distance: response.rows[0].elements[i].distance.text, 
+                               value: response.rows[0].elements[i].distance.value })
                 }
             };
-						$scope.places = answers;
-						$scope.$apply();
+            $scope.supermarketsList = res;
+            $scope.getBestSupermarket();
+            $scope.$apply();
         });
-		}
-	
-    $scope.filterSupermarkets = function(){
-        if ($scope.supermarket === places.supermarket){
-            return true;
-        }
     }
+
+    $scope.getBestSupermarket = () => {
+        let stats = {
+            RamiLevi:  {name: 'RamiLevi', sum: 0 , numOfElements: 0, avg: 0},
+            Shufersal: {name: 'Shufersal', sum: 0 , numOfElements: 0, avg: 0},
+            Mega:      {name: 'Mega', sum: 0 , numOfElements: 0, avg: 0},
+            Yenot:     {name: 'Yenot', sum: 0 , numOfElements: 0, avg: 0},
+        };
+        $scope.supermarketsList.forEach(function(element) {
+            if (element.value < RADIUS) {
+                switch (element.supermarket) {
+                    case 'RamiLevi':
+                        stats.RamiLevi.sum += element.value;
+                        stats.RamiLevi.numOfElements += 1;
+                        break;
+                    case 'Shufersal':
+                        stats.Shufersal.sum += element.value;
+                        stats.Shufersal.numOfElements += 1;
+                        break;
+                    
+                    case 'Mega':
+                        stats.Mega.sum += element.value;
+                        stats.Mega.numOfElements += 1;
+                        break;
+                    
+                    case 'Yenot':
+                        stats.Yenot.sum += element.value;
+                        stats.Yenot.numOfElements += 1;
+                        break;
+                    default:
+                        break;
+                  }
+            }
+        });
+        Object.keys(stats).forEach(key => {
+            if (stats[key].numOfElements !== 0) {
+                stats[key].avg = stats[key].sum / stats[key].numOfElements;
+            }
+        });
+        let min = {name: '', dist: RADIUS};
+        Object.keys(stats).forEach(key => {
+            if (stats[key].numOfElements !== 0 && stats[key].avg < min.dist) {
+                min.dist = stats[key].avg;
+                min.name = stats[key].name;
+            }
+        });
+        $scope.bestSupermarket = min.name;
+    };
 })
 

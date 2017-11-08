@@ -1,0 +1,134 @@
+{
+    "supermarketsList": [
+        {
+            "address": "Ha-Sivim St 37, Petah Tikva",
+            "supermarket": "RamiLevi",
+            "location":
+            {
+                "latetiude": 32.0879592,
+                "longitude": 34.8545899
+            }
+        },
+        {
+            "address": "Dvora HaNevi'a St 126, Tel Aviv-Yafo",
+            "supermarket": "RamiLevi",
+            "location":
+            {
+                "latetiude": 32.1131676,
+                "longitude": 34.8401319
+            }
+        },
+        {
+            "address": "Kanfei Nesharim St 26, Jerusalem",
+            "supermarket": "RamiLevi",
+            "location":
+            {
+                "latetiude": 31.7882871,
+                "longitude": 35.1828353
+            }
+        },
+
+        {
+            "address": "Beit Ha-Defus St 13, Jerusalem",
+            "supermarket": "RamiLevi",
+            "location":
+            {
+                "latetiude": 31.7858989,
+                "longitude": 35.1853728
+            }
+        },
+
+        {
+            "address": "HaAtsmaut St 65, Petah Tikva",
+            "supermarket": "Shufersal",
+            "location":
+            {
+                "latetiude": 32.1145625,
+                "longitude": 34.7672834
+            }
+        },
+         {
+            "address": "ben gurion 18, Giv'at Shmu'el",
+            "supermarket": "Shufersal",
+            "location":
+            {
+                "latetiude": 32.1145625,
+                "longitude": 34.7672834
+            }
+        },
+         {
+            "address": "Kanfei Nesharim St 24, Jerusalem",
+            "supermarket": "Shufersal",
+            "location":
+            {
+                "latetiude": 31.7880439,
+                "longitude": 35.1847376
+            }
+        },
+         {
+            "address": "Tse'elon St 21, Modi'in Makabim-Re'ut",
+            "supermarket": "Shufersal",
+            "location":
+            {
+                "latetiude": 31.9059884,
+                "longitude": 35.014797
+            }
+        },
+         {
+            "address": "Kiryat Ekron",
+            "supermarket": "Mega",
+            "location":
+            {
+                "latetiude": 31.8696133,
+                "longitude": 34.8186304
+            }
+        },
+      
+          {
+            "address": "Korazin St 1, Giv'atayim",
+            "supermarket": "Mega",
+            "location":
+            {
+                "latetiude": 32.0330376,
+                "longitude": 34.7465817
+            }
+        },
+          {
+            "address": "Bnei Ephraim St 209, Tel Aviv-Yafo",
+            "supermarket": "Mega",
+            "location":
+            {
+                "latetiude": 32.0330376,
+                "longitude": 34.7465817
+            }
+        },
+        {
+            "address": "Berl Katsnelson St 14, Kfar Saba",
+            "supermarket": "Mega",
+            "location":
+            {
+                "latetiude": 32.0330376,
+                "longitude": 34.7465817
+            }
+        },
+        {
+            "address": "Derech HaMerkaz 4, Kohav Ya'ir",
+            "supermarket": "Yenot",
+            "location":
+            {
+                "latetiude": 31.7772378,
+                "longitude": 35.0000638
+            }
+        },
+        {
+            "address": "HaMarganit St 2, Holon",
+            "supermarket": "Yenot",
+            "location":
+            {
+                "latetiude": 32.0089088,
+                "longitude": 34.7763209
+            }
+        }
+    ],
+    "status": "OK"
+}
